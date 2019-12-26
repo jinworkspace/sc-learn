@@ -1,0 +1,39 @@
+spring:
+    profiles:
+        active: dev
+    cloud:
+        config:
+            name: sc-service
+            fail-fast: true
+
+server:
+    tomcat:
+        min-spare-threads: 20
+        max-threads: 100
+        connection-timeout: 5000
+
+eureka:
+    client:
+        service-url:
+            defaultZone: ${eureka-url}
+        registryFetchIntervalSeconds: 5
+    instance:
+        instance-id: sc-service:${server.port}
+        prefer-ip-address: true
+        leaseRenewalIntervalInSeconds: 5
+        leaseExpirationDurationInSeconds: 10
+#dev
+---
+spring:
+    profiles: dev
+    cloud:
+        config:
+            uri: http://localhost:8989
+            #其中uri为config-server得地址，因为不同环境有不同得ip所以需配置成变量
+            profile: dev
+server:
+    port: 9021
+eureka-url: http://localhost:1000/eureka/
+
+
+

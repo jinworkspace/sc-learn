@@ -1,0 +1,29 @@
+server:
+    port: 8989
+    tomcat:
+        min-spare-threads: 20
+        max-threads: 100
+        connection-timeout: 5000
+spring:
+    cloud:
+        config:
+            server:
+                git:
+                    uri: https://github.com/jinworkspace/git-config.git
+                    #gitlab仓库账号
+                    username: jinworkspace@163.com
+                    password: jz5816971
+            label: master
+    application:
+        name: config
+#采用ip地址作为服务注册而不是服务名称
+eureka:
+    client:
+        service-url:
+            defaultZone: http://localhost:1000/eureka/
+        registryFetchIntervalSeconds: 5
+    instance:
+        leaseRenewalIntervalInSeconds: 5
+        leaseExpirationDurationInSeconds: 10
+        instance-id: sc-config:${server.port}
+        prefer-ip-address: true

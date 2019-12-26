@@ -1,0 +1,42 @@
+spring:
+    profiles:
+        active: dev
+    application:
+        name: sc-register
+eureka:
+    instance:
+        ## 没有心跳的淘汰时间
+        leaseExpirationDurationInSeconds: 10
+        ## 心跳间隔
+        leaseRenewalIntervalInSeconds: 5
+    server:
+        ## 心跳阈值计算周期
+        renewalThresholdUpdateIntervalMs: 120000
+        ## 禁用readOnlyCacheMap
+        useReadOnlyResponseCache: false
+        ## 自我保护模式
+        enableSelfPreservation: false
+    client:
+        service-url:
+            defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+        register-with-eureka: false
+        fetch-registry: false
+server:
+    tomcat:
+        max-http-header-size: 8192
+        min-spare-threads: 20
+        max-threads: 100
+        connection-timeout: 5000
+
+
+#dev
+---
+spring:
+    profiles: dev
+server:
+    port: 1000
+eureka:
+    instance:
+        hostname: localhost
+
+
