@@ -14,7 +14,7 @@
     <description>服务</description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>1.8</java.version>1111
     </properties>
 
     <dependencies>
